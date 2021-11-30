@@ -2,6 +2,8 @@ package trie
 
 import (
 	"container/list"
+	"good_coder/util"
+	"runtime"
 	"strconv"
 	"strings"
 )
@@ -23,7 +25,12 @@ func (t *Trie) NewWord(spell string, dict string) {
 	runeSpell := []byte(spell)
 
 	parseDictionary := func(n *Node) {
-		line := strings.Split(dict, "\n")
+		var line []string
+		if runtime.GOOS == "windows" {
+			line = strings.Split(dict, util.WindowsEnter)
+		} else {
+			line = strings.Split(dict, util.UnixEnter)
+		}
 
 		for _, v := range line {
 			part := strings.Split(v, " ")

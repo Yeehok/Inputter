@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"good_coder/input_method"
+	"good_coder/util"
 	"io/ioutil"
 	"os"
 	"runtime"
@@ -19,9 +20,9 @@ func loop(files []string) {
 			break
 		}
 		if runtime.GOOS == "windows" {
-			spell = strings.TrimRight(spell, "\n\r")
+			spell = strings.TrimRight(spell, util.WindowsEnter)
 		} else {
-			spell = strings.TrimRight(spell, "\n")
+			spell = strings.TrimRight(spell, util.UnixEnter)
 		}
 		words := im.FindWords(spell)
 		fmt.Println(strings.Join(words, ", "))
