@@ -10,7 +10,7 @@
 package input_method
 
 import (
-	"good_coder/trie"
+	"inputter/trie"
 	"io/ioutil"
 	"net/http"
 	"os"

@@ -11,7 +11,7 @@ package trie
 
 import (
 	"container/list"
-	"good_coder/util"
+	"inputter/util"
 	"runtime"
 	"strconv"
 	"strings"

@@ -12,8 +12,8 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"good_coder/input_method"
-	"good_coder/util"
+	"inputter/input_method"
+	"inputter/util"
 	"io/ioutil"
 	"os"
 	"runtime"
