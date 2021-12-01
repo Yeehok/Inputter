@@ -10,7 +10,6 @@
 package input_method
 
 import (
-	"fmt"
 	"good_coder/trie"
 	"io/ioutil"
 	"net/http"
@@ -30,7 +29,6 @@ func New(dict []string) *inputMethod {
 		if strings.HasPrefix(v, "http") { // load from internet
 			response, err := http.Get(v)
 			if err != nil || response.StatusCode != http.StatusOK {
-				fmt.Println("load dictionary failed:", err, ", path:", v)
 				continue
 			}
 
@@ -39,7 +37,6 @@ func New(dict []string) *inputMethod {
 
 			spell, ret := getSpell(v)
 			if ret != 0 {
-				fmt.Println("load dictionary failed:", err, ", path:", v)
 				continue
 			}
 
@@ -47,12 +44,10 @@ func New(dict []string) *inputMethod {
 		} else { // load from file
 			file, err := os.OpenFile(v, os.O_RDONLY, 0666)
 			if err != nil {
-				fmt.Println("load dictionary failed:", err, ", path:", v)
 				continue
 			}
 			fileContent, err := ioutil.ReadAll(file)
 			if err != nil {
-				fmt.Println("load dictionary failed:", err, ", path:", v)
 				continue
 			}
 
