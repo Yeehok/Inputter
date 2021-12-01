@@ -1,6 +1,13 @@
-package trie
+// Package trie
+/* Copyright 2021 Baidu Inc. All Rights Reserved. */
+/*
+@file sorted_map.go
+@author shenyihao(com@baidu.com)
+@date 2021/11/25
+@brief a sorted map implementation
+*/
 
-import "fmt"
+package trie
 
 type Key interface {
 	Greater(v interface{}) bool
@@ -10,24 +17,6 @@ type Key interface {
 type SortedMap struct {
 	index []Key
 	value map[Key]interface{}
-}
-
-// Print debug
-func (sm *SortedMap) Print() {
-	fmt.Println("-----start-----")
-	for k, v := sm.Front(); k != nil && v != nil; k, v = sm.Next(k) {
-		fmt.Println("key: ", k, ", value:", v)
-	}
-	fmt.Println("-----end-----")
-}
-
-// PrintBack debug
-func (sm *SortedMap) PrintBack() {
-	fmt.Println("-----start-----")
-	for k, v := sm.Back(); k != nil && v != nil; k, v = sm.Previous(k) {
-		fmt.Println("key: ", k, ", value:", v)
-	}
-	fmt.Println("-----end-----")
 }
 
 func NewMap() *SortedMap {

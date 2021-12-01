@@ -1,3 +1,12 @@
+// Package trie
+/* Copyright 2021 Baidu Inc. All Rights Reserved. */
+/*
+@file trie.go
+@author shenyihao(com@baidu.com)
+@date 2021/11/25
+@brief trie implementation
+*/
+
 package trie
 
 import (
@@ -21,6 +30,7 @@ func (t *Trie) Init() *Trie {
 	return t
 }
 
+// NewWord spell and dictionary
 func (t *Trie) NewWord(spell string, dict string) {
 	runeSpell := []byte(spell)
 
@@ -78,7 +88,11 @@ func (t *Trie) FindWords(spell string) (res []string) {
 
 	resMap := NewMap()
 
+	// add words from n.dictionary
 	insertWords := func(n *Node) {
+		if n.dictionary.Len() <= 0 {
+			return
+		}
 		for k, v := n.dictionary.Back(); k != nil && v != nil; k, v = n.dictionary.Previous(k) {
 			s := *(v.(*[]string))
 			if v2, f := resMap.Get(k); f {
@@ -90,6 +104,7 @@ func (t *Trie) FindWords(spell string) (res []string) {
 		}
 	}
 
+	// Traversal using Breadth-First-Search
 	var insertChild func(n *Node)
 	insertChild = func(root *Node) {
 		if root == nil {
@@ -102,9 +117,7 @@ func (t *Trie) FindWords(spell string) (res []string) {
 		for queue.Len() != 0 {
 			n := queue.Front().Value.(*Node)
 
-			if n.dictionary.Len() > 0 {
-				insertWords(n)
-			}
+			insertWords(n)
 
 			for _, v := range n.child {
 				queue.PushBack(v)
@@ -135,6 +148,7 @@ func (t *Trie) FindWords(spell string) (res []string) {
 	return
 }
 
+// Int key of trie
 type Int struct {
 	int
 }

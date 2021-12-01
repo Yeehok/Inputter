@@ -1,3 +1,12 @@
+// Package input_method
+/* Copyright 2021 Baidu Inc. All Rights Reserved. */
+/*
+@file input_method.go
+@author shenyihao(com@baidu.com)
+@date 2021/11/25
+@brief input engine
+*/
+
 package input_method
 
 import (
@@ -11,11 +20,6 @@ import (
 
 type inputMethod struct {
 	dictionary *trie.Trie
-}
-
-type singleCharacter struct {
-	weight int
-	character string
 }
 
 func New(dict []string) *inputMethod {
@@ -54,7 +58,6 @@ func New(dict []string) *inputMethod {
 
 			spell, ret := getSpell(v)
 			if ret != 0 {
-				fmt.Println("load dictionary failed:", err, ", path:", v)
 				continue
 			}
 
